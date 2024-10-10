@@ -1,0 +1,118 @@
+---
+title: "Herminium monorchis root and seed fungi"
+author: "Norwegian institute for nature research"
+date: "10/03/2024"
+format: pdf
+pdf-engine: pdflatex
+---
+
+This script treats data collected from root and seed capsules of Herminium morchis at two sites on Hvaler, Norway.
+
+Before getting started, we can run this line to make sure R can read Norwegian letters.
+
+```{r}
+#| label: Language settings
+#| warning: false
+
+Sys.setlocale(locale='no_NB.utf8')
+
+```
+
+Load the required packages.
+
+```{r}
+#| label: Install packages
+#| warning: false
+
+library(tidyverse)
+library(stringr)
+library(readxl)
+
+
+#NB use install.packages("package name") if the package is not installed yet.
+#Using qmd requires the "rmarkdown" package installed.
+```
+
+Then we can import the data
+
+```{r}
+#| label: Import data
+#| warning: false
+
+df <- read_excel("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Artslist_rot_og_fro_04042024.xlsx", sheet = 'Sheet1')
+```
+
+The data frame contains some columns we do not need. We can also give them a better name.
+
+```{r}
+#| label: Select relevant columns
+#| warning: false
+
+df <- df %>% 
+  select(c("final_phylum", 
+           "final_class", 
+           "final_order", 
+           "final_family", 
+           "final_genus", 
+           "final_species", 
+           "komment_fra_Marie", 
+           "root1":"SKJ_F5"))
+
+df <- df %>% 
+  rename("Phylum" = "final_phylum", 
+           "Class" = "final_class", 
+           "Order" = "final_order", 
+           "Family" = "final_family", 
+           "Genus" = "final_genus", 
+           "Species" = "final_species", 
+           "Comment" = "komment_fra_Marie", 
+           "SKJ_R1" = "root1", 
+           "SKJ_R2" = "root2")
+```
+
+Now we can convert the dataset from a wide to long format.
+
+```{r}
+#| label: Create long data set
+#| warning: false
+
+df_long <- df %>% pivot_longer(cols = "SKJ_R1":"SKJ_F5", names_to = "Sample_ID", values_to = "Count")
+```
+
+Add a column that describes the locality and sample type.
+
+```{r}
+#| label: Include locality, sample type
+#| warning: false
+
+df_long <- df_long %>% mutate(
+    Locality = case_when(str_detect(Sample_ID, "SKJ") ~ "Skjellvik", 
+                       str_detect(Sample_ID, "SKI") ~ "Skipstadsand"), 
+    Sample_type = case_when(str_detect(Sample_ID, "R") ~ "root",
+                   str_detect(Sample_ID, "F") ~ "seed_capsule"))
+```
+
+Export the dataset as xlsx.
+
+```{r}
+#| label: Export data
+#| warning: false
+
+#Select the columns we need, in the proper order. 
+df_long <- df_long %>% select(Locality,
+                              Sample_ID, 
+                              Sample_type, 
+                              Phylum,
+                              Class, 
+                              Order,
+                              Family, 
+                              Genus, 
+                              Species, 
+                              Count, 
+                              Comment)
+
+#Export the dataset, best to export as .xlsx as this is most likely to preserve norwegian letters
+openxlsx::write.xlsx(df_long, file = "P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Root_and_seed_fungi_clean_03.10.2024.xlsx", colNames = TRUE)
+
+
+```

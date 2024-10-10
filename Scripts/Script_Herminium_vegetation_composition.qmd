@@ -1,0 +1,162 @@
+---
+title: "Script_Herminium_vegetation_composition"
+author: "Norwegian institute for nature research"
+format: html
+editor: visual
+---
+
+## About
+
+This script is to analyse vegetation composition in plots with and without Herminium monorchis.
+
+## Language settings
+
+Before getting started, we can run this line to make sure R can read Norwegian letters.
+
+```{r}
+#| label: Language settings   
+#| warning: false  
+Sys.setlocale(locale='no_NB.utf8')
+```
+
+## Packages
+
+Load required packages.
+
+```{r}
+ #| label: Language settings 
+ #| warning: false
+
+library(reshape2)
+library(readxl)
+library(tidyverse)
+library(vegan)
+library(ggrepel)
+```
+
+## Load data
+
+```{r}
+#| label: Load data
+#| warning: false
+
+df <- read_xlsx("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_monorchis_masterfile_v_2024.xlsx", sheet = "Plot_plants")
+
+```
+
+## Explore and clean data
+
+```{r}
+#| label: Exploring data
+#| warning: false
+
+str(df)
+unique(df$Locality)
+unique(df$Species_norwegian)
+
+df %>%  
+    pull(Species_norwegian) %>% 
+    unique %>% 
+    sort
+
+#Vill-lin and Vill-lin are duplicates. Change Rapp sp. to Rappslekta, Vikke sp. til Vikkeslekta
+
+df <- df %>% mutate(Species_norwegian = recode(Species_norwegian, 
+                                         `Rapp sp.` = "Rappslekta",
+                                         `Vikke sp.` = "Vikkeslekta", 
+                                         `Vill-Lin` = "Vill-lin"))
+
+#Remove rows where nothing was registered in the Quadrats. 
+df <- df %>%
+  filter(!is.na(Presence_quadrat))
+
+#Remove unknown species
+df <- df %>% 
+  filter(!grepl('Ukjent', Species_norwegian))
+
+#Filletassen plot 4 has a musk orchid observation that is new this year. Therefore, the plot was not sampled for vegetation composition. Removing this plot is the best option. 
+
+df <- df %>% 
+  filter(!grepl('FI4', Plot_ID_new))
+
+#Adding a column for presence of Musk orchid
+
+df <- df %>% 
+  group_by(Plot_ID_new) %>% 
+  mutate(Presence_H_monorchis = ifelse(any(Species_norwegian == "Honningblom" & Quadrats >= 1), "Present", "Absent"))
+
+```
+
+## Perform NMDS analysis
+
+First, we need to prepare the data for NMDS, then perform the NMDS and make a plot. Following this and previous scripts: <https://rpubs.com/CPEL/NMDS>
+
+```{r}
+#| Label: Prepare data for NMDS
+#| warning: false
+
+#We need to create a species matrix
+df_nmds <- dcast(df, Plot_ID_new + Locality + Presence_H_monorchis ~ Species_norwegian, value.var = "Quadrats",
+            fun.aggregate = sum, fill = 0)
+
+#Create species dataset
+df_species <- df_nmds %>% 
+  select(!c(Plot_ID_new, Locality, Presence_H_monorchis))
+
+#Create grouping dataset
+df_groups <- df_nmds %>% 
+  select(Plot_ID_new, Locality, Presence_H_monorchis)
+
+# Calculating relative abundance and creating new dataframe with relative abundance data
+df_species_rel <-         
+  decostand(df_species, method = "total")
+
+# Calculating distances
+df_distmat <- 
+  vegdist(df_species_rel, method = "bray")
+
+# Create matrix
+df_distmat <- 
+  as.matrix(df_distmat, labels = T)
+#write.csv(island.spp_distmat, "island_spp_distmat.csv")
+
+# Running NMDS
+NMDS <-
+  metaMDS(df_distmat,
+          distance = "bray",
+          k = 3,
+          maxit = 999, 
+          trymax = 500,
+          wascores = TRUE)
+
+stressplot(NMDS)#Creates stress plot
+
+#Making a quick plot
+plot(NMDS, "sites")
+
+#Extract NMDS scores and combine with grouping variables
+df_nmds_scores = as.data.frame(scores(NMDS))
+df_nmds_scores <- bind_cols(df_groups, df_nmds_scores)
+
+#Making a nice ggplot
+
+NMDS.plot <- ggplot(df_nmds_scores, aes(x = NMDS1, y = NMDS2))+
+  geom_point(size = 4, aes(colour = Locality, shape = as.factor(Presence_H_monorchis)))+
+  theme(axis.text.y = element_text(size = 12), 
+        axis.text.x = element_text(size = 12), 
+        legend.text = element_text(size = 12), 
+        legend.position = "right") +
+  theme_classic()+
+  labs(x = "NMDS1", y = "NMDS2") +
+  geom_text_repel(aes(label = Plot_ID_new), size=2)+
+  guides(colour = guide_legend(title="Lokalitet"), 
+         shape = guide_legend("Forekomst i ruten"))+
+  scale_shape_manual(values = c(21,19), 
+                     labels = c("Uten", "Med"))
+
+NMDS.plot
+
+ggsave("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Output/NMDS_honningblom.jpeg", NMDS.plot, width = 16, height = 12, units = "cm")
+
+
+```

@@ -1,0 +1,376 @@
+"","Date","Locality","Locality_ID","Plot_ID","Plot_ID_new","Species_norwegian","Presence_quadrat","Quadrats","Comment","Sampling"
+"1","22.07.2024","Skipstadsand","SKI","13","SKI13","honningblom",NA,NA,"","MSc"
+"2","22.07.2024","Skipstadsand","SKI","2","SKI2","honningblom","1",1,"Små furuplanter","MSc"
+"3","22.07.2024","Skipstadsand","SKI","14","SKI14","honningblom",NA,NA,"","MSc"
+"4","22.07.2024","Skipstadsand","SKI","9","SKI9","honningblom","1",1,"","MSc"
+"5","22.07.2024","Skipstadsand","SKI","4","SKI4","honningblom","1",1,"Kant av sti","MSc"
+"6","22.07.2024","Skipstadsand","SKI","6","SKI6","honningblom","1",1,"I kant av sti","MSc"
+"7","22.07.2024","Skipstadsand","SKI","3","SKI3","honningblom","1",1,"I kant av sti","MSc"
+"8","22.07.2024","Skipstadsand","SKI","7","SKI7","honningblom","1",1,"","MSc"
+"9","22.07.2024","Skipstadsand","SKI","8","SKI8","honningblom","1",1,"","MSc"
+"10","23.07.2024","Filletassen","FI","1","FI1","havsivaks","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"11","23.07.2024","Filletassen","FI","1","FI1","blåkoll","1,3,4,5,6,12,13",7,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"12","23.07.2024","Filletassen","FI","1","FI1","gåsemure","1,2,3,4,9,10,11,12,14,15,16,5,6,7,8",15,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"13","23.07.2024","Filletassen","FI","1","FI1","kornstarr","9,11,12,13,14,15,16,2,5,6,7,8",12,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"14","23.07.2024","Filletassen","FI","1","FI1","sumpmaure","10,13,14,15,16,1,5,12",8,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"15","23.07.2024","Filletassen","FI","1","FI1","engsoleie","1,2,3,7,9,12,13,16",8,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"16","23.07.2024","Filletassen","FI","1","FI1","rødkløver","2,10,13",3,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"17","23.07.2024","Filletassen","FI","1","FI1","tepperot","2,4",2,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"18","23.07.2024","Filletassen","FI","1","FI1","honningblom","2,13,3",3,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"19","23.07.2024","Filletassen","FI","1","FI1","engknoppurt","3,4,5,8,10,11,12,15",8,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"20","23.07.2024","Filletassen","FI","1","FI1","mjødurt","3,9,15,16,5",5,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"21","23.07.2024","Filletassen","FI","1","FI1","tiriltunge","4,9,10,13,14,16,7,8",8,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"22","23.07.2024","Filletassen","FI","1","FI1","","4,15",2,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"23","23.07.2024","Filletassen","FI","1","FI1","tveskjeggveronika","9,10",2,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"24","23.07.2024","Filletassen","FI","1","FI1","ryllik","6,13",2,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"25","23.07.2024","Filletassen","FI","1","FI1","blåklokke","8,2",2,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"26","23.07.2024","Filletassen","FI","1","FI1","sløke","9",1,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"27","23.07.2024","Filletassen","FI","1","FI1","myrtistel","11",1,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"28","23.07.2024","Filletassen","FI","1","FI1","hjertegras","1,2,3,4,5,6,7,8,10,14",10,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"29","23.07.2024","Filletassen","FI","1","FI1","rødsvingel","1,2,3,4,5,6,8,14,9,15,16,10,13,12",14,"Abacina - se bilde. karse?+
+tveskjeggveronika, ee Rubens innsamling","S123"
+"30","23.07.2024","Filletassen","FI","6","FI6","mjødurt","9,10,13,14,16,1,2,3,4,5,6,7,8",13,"","S123"
+"31","23.07.2024","Filletassen","FI","6","FI6","sumpmaure","9,10,11,12,13,15,16,1,2,3,5,6,7,8",14,"","S123"
+"32","23.07.2024","Filletassen","FI","6","FI6","gåsemure","10,12,13,15,16,1,2,6,7,8",10,"","S123"
+"33","23.07.2024","Filletassen","FI","6","FI6","havsivaks","9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8",16,"","S123"
+"34","23.07.2024","Filletassen","FI","6","FI6","myrtistel","9,10,11,12,13,14,15,16,1,2,4,6,7",13,"","S123"
+"35","23.07.2024","Filletassen","FI","6","FI6","engsoleie","9,10,11,1,2,5",6,"","S123"
+"36","23.07.2024","Filletassen","FI","6","FI6","vill-lin","1,5",2,"","S123"
+"37","23.07.2024","Filletassen","FI","6","FI6","sløke","1",1,"","S123"
+"38","23.07.2024","Filletassen","FI","6","FI6","kornstarr","9,10,15,1,3,5",6,"","S123"
+"39","23.07.2024","Filletassen","FI","6","FI6","rødsvingel","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"","S123"
+"40","23.07.2024","Filletassen","FI","6","FI6","småengkall","1,4,5,6,13",5,"","S123"
+"41","23.07.2024","Filletassen","FI","6","FI6","blåtopp","10",1,"","S123"
+"42","23.07.2024","Filletassen","FI","6","FI6","hjertegras","2,3,4,6,14,16",6,"","S123"
+"43","23.07.2024","Filletassen","FI","6","FI6","honningblom","3,7,14,15,16",5,"","S123"
+"44","23.07.2024","Filletassen","FI","6","FI6","fuglevikke","8,13",2,"","S123"
+"45","23.07.2024","Filletassen","FI","6","FI6","rødkløver","7,10,11",3,"","S123"
+"46","23.07.2024","Filletassen","FI","6","FI6","blåkoll","13",1,"","S123"
+"47","23.07.2024","Filletassen","FI","7","FI7","honningblom",NA,NA,"","not sampled"
+"48","23.07.2024","Filletassen","FI","3","FI3","honningblom",NA,NA,"","not sampled"
+"49","23.07.2024","Filletassen","FI","4","FI4","honningblom","1",1,"Nytt tråkk i kant av ruta","not sampled"
+"50","23.07.2024","Filletassen","FI","10","FI10","honningblom",NA,NA,"Noe beite gås","not sampled"
+"51","23.07.2024","Filletassen","FI","9","FI9","honningblom",NA,NA,"Og tråkk","not sampled"
+"52","23.07.2024","Skipstadsand","SKI","1","SKI1","honningblom","1",1,"","MSc"
+"53","23.07.2024","Skipstadsand","SKI","11","SKI11","honningblom",NA,NA,"I kant av sti. beite av gås","MSc"
+"54","23.07.2024","Skipstadsand","SKI","12","SKI12","honningblom",NA,NA,"","MSc"
+"55","24.07.2024","Skjellvik","SKJ","12","SKJ12","honningblom","1",1,"Pors","MSc"
+"56","24.07.2024","Skjellvik","SKJ","24","SKJ24","honningblom",NA,NA,"","MSc"
+"57","24.07.2024","Skjellvik","SKJ","25","SKJ25","honningblom",NA,NA,"","MSc"
+"58","24.07.2024","Skjellvik","SKJ","23","SKJ23","honningblom","1",1,"","MSc"
+"59","24.07.2024","Skjellvik","SKJ","11","SKJ11","honningblom","1",1,"","MSc"
+"60","24.07.2024","Skjellvik","SKJ","10","SKJ10","honningblom","1",1,"","MSc"
+"61","24.07.2024","Skjellvik","SKJ","26","SKJ26","honningblom",NA,NA,"","MSc"
+"62","24.07.2024","Skjellvik","SKJ","27","SKJ27","honningblom",NA,NA,"Svartor","MSc"
+"63","24.07.2024","Skjellvik","SKJ","5","SKJ5","honningblom","1",1,"","MSc"
+"64","24.07.2024","Skjellvik","SKJ","3","SKJ3","honningblom","1",1,"","MSc"
+"65","23.07.2024","Filletassen","FI","2","FI2","honningblom","4,3,8,10,11",5,"Tvesjegg er noe annet","S123"
+"66","23.07.2024","Filletassen","FI","2","FI2","mjødurt","1,2,5,6,7,9,10,11,12,14,15,16",12,"Tvesjegg er noe annet","S123"
+"67","23.07.2024","Filletassen","FI","2","FI2","gåsemure","5,6,7,8,9,11,12,13,14",9,"Tvesjegg er noe annet","S123"
+"68","23.07.2024","Filletassen","FI","2","FI2","blåkoll","1,5,9",3,"Tvesjegg er noe annet","S123"
+"69","23.07.2024","Filletassen","FI","2","FI2","ryllik","1,2,3,4,5,8,13,14",8,"Tvesjegg er noe annet","S123"
+"70","23.07.2024","Filletassen","FI","2","FI2","tiriltunge","3,4,11,14,15",5,"Tvesjegg er noe annet","S123"
+"71","23.07.2024","Filletassen","FI","2","FI2","sumpmaure","4,11,13,15,16",5,"Tvesjegg er noe annet","S123"
+"72","23.07.2024","Filletassen","FI","2","FI2","engknoppurt","12,16",2,"Tvesjegg er noe annet","S123"
+"73","23.07.2024","Filletassen","FI","2","FI2","kattehale","2,6,7",3,"Tvesjegg er noe annet","S123"
+"74","23.07.2024","Filletassen","FI","2","FI2","havsivaks","1,12,2,13,14,3,4,15,5,16,6,7,8,9,10,11",16,"Tvesjegg er noe annet","S123"
+"75","23.07.2024","Filletassen","FI","2","FI2","tepperot","3,13,9",3,"Tvesjegg er noe annet","S123"
+"76","23.07.2024","Filletassen","FI","2","FI2","tveskjeggveronika","10",1,"Tvesjegg er noe annet","S123"
+"77","23.07.2024","Filletassen","FI","2","FI2","kornstarr","1,2,3,5,6,9,10,13,15,14,16",11,"Tvesjegg er noe annet","S123"
+"78","23.07.2024","Filletassen","FI","2","FI2","hvitkløver","11",1,"Tvesjegg er noe annet","S123"
+"79","23.07.2024","Filletassen","FI","2","FI2","engsoleie","15,4",2,"Tvesjegg er noe annet","S123"
+"80","23.07.2024","Filletassen","FI","2","FI2","rødsvingel","1,2,4,5,7,10,11,3,14,15",10,"Tvesjegg er noe annet","S123"
+"81","23.07.2024","Filletassen","FI","2","FI2","hjertegras","3,5,9,16,15",5,"Tvesjegg er noe annet","S123"
+"82","23.07.2024","Filletassen","FI","2","FI2","legeveronika","14,13",2,"Tvesjegg er noe annet","S123"
+"83","23.07.2024","Filletassen","FI","5","FI5","havsivaks","1,2,13,12,14,3,16,15,4,5,6,7,8,9,10,11",16,"Slirestarr må nøkles","S123"
+"84","23.07.2024","Filletassen","FI","5","FI5","kornstarr","2,3,4,5,6,7,8,9,10,11,12,13,15,14,16",15,"Slirestarr må nøkles","S123"
+"85","23.07.2024","Filletassen","FI","5","FI5","honningblom","3,9,10,13",4,"Slirestarr må nøkles","S123"
+"86","23.07.2024","Filletassen","FI","5","FI5","gåsemure","1,2,3,5,6,7,9,11,14",9,"Slirestarr må nøkles","S123"
+"87","23.07.2024","Filletassen","FI","5","FI5","myrtistel","1,2,3,4,6,7,8,10",8,"Slirestarr må nøkles","S123"
+"88","23.07.2024","Filletassen","FI","5","FI5","mjødurt","1,5,6,7,8,9,10,12,14,15",10,"Slirestarr må nøkles","S123"
+"89","23.07.2024","Filletassen","FI","5","FI5","engsoleie","1,4,5,6,7,8,11,12,13,15,16",11,"Slirestarr må nøkles","S123"
+"90","23.07.2024","Filletassen","FI","5","FI5","sumpmaure","1,2,12",3,"Slirestarr må nøkles","S123"
+"91","23.07.2024","Filletassen","FI","5","FI5","tiriltunge","3,4,6,7,8,9,11,12,15,16",10,"Slirestarr må nøkles","S123"
+"92","23.07.2024","Filletassen","FI","5","FI5","hjertegras","5,12",2,"Slirestarr må nøkles","S123"
+"93","23.07.2024","Filletassen","FI","5","FI5","sløke","4",1,"Slirestarr må nøkles","S123"
+"94","23.07.2024","Filletassen","FI","5","FI5","blåkoll","9",1,"Slirestarr må nøkles","S123"
+"95","23.07.2024","Filletassen","FI","5","FI5","rødkløver","10",1,"Slirestarr må nøkles","S123"
+"96","23.07.2024","Filletassen","FI","5","FI5","legeveronika","14,5",2,"Slirestarr må nøkles","S123"
+"97","23.07.2024","Filletassen","FI","5","FI5","slirestarr","15",1,"Slirestarr må nøkles","S123"
+"98","23.07.2024","Filletassen","FI","8","FI8","tiriltunge","1,2,3,5,4,7,8,9,11,10,12,13,14,15,16",15,"","S123"
+"99","23.07.2024","Filletassen","FI","8","FI8","blåkoll","1,13,14,2,4,5",6,"","S123"
+"100","23.07.2024","Filletassen","FI","8","FI8","karve","16",1,"","S123"
+"101","23.07.2024","Filletassen","FI","8","FI8","gåsemure","1,2,5,6,7,8,9,10,12,13,14,15,16",13,"","S123"
+"102","23.07.2024","Filletassen","FI","8","FI8","hjertegras","1,2,5,6,7,8,14,15",8,"","S123"
+"103","23.07.2024","Filletassen","FI","8","FI8","knegras","2,3,1,15,4,5,8,11",8,"","S123"
+"104","23.07.2024","Filletassen","FI","8","FI8","honningblom","4,15",2,"","S123"
+"105","23.07.2024","Filletassen","FI","8","FI8","myrtistel","4",1,"","S123"
+"106","23.07.2024","Filletassen","FI","8","FI8","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"","S123"
+"107","23.07.2024","Filletassen","FI","8","FI8","havsivaks","1,3,7,8,11,10,13,14,16",9,"","S123"
+"108","23.07.2024","Filletassen","FI","8","FI8","engfrytle","2,3,11",3,"","S123"
+"109","23.07.2024","Skipstadsand","SKI","15","SKI15","honningblom",NA,NA,"","MSc"
+"110","23.07.2024","Skipstadsand","SKI","16","SKI16","honningblom",NA,NA,"","MSc"
+"111","23.07.2024","Skipstadsand","SKI","17","SKI17","honningblom",NA,NA,"","MSc"
+"112","24.07.2024","Skjellvik","SKJ","18","SKJ18","honningblom","1",1,"Nb mye engmarihand i ruten","MSc"
+"113","24.07.2024","Skjellvik","SKJ","19","SKJ19","honningblom","1",1,"","MSc"
+"114","24.07.2024","Skjellvik","SKJ","20","SKJ20","honningblom",NA,NA,"","MSc"
+"115","24.07.2024","Skjellvik","SKJ","21","SKJ21","honningblom",NA,NA,"","MSc"
+"116","24.07.2024","Skjellvik","SKJ","22","SKJ22","honningblom",NA,NA,"","MSc"
+"117","24.07.2024","Skjellvik","SKJ","17","SKJ17","honningblom",NA,NA,"","MSc"
+"118","24.07.2024","Skjellvik","SKJ","16","SKJ16","honningblom",NA,NA,"","MSc"
+"119","24.07.2024","Skjellvik","SKJ","15","SKJ15","honningblom",NA,NA,"","MSc"
+"120","24.07.2024","Skjellvik","SKJ","14","SKJ14","honningblom",NA,NA,"Nb engmarihand i ruten","MSc"
+"121","24.07.2024","Skjellvik","SKJ","13","SKJ13","honningblom","1",1,"","MSc"
+"122","24.07.2024","Skjellvik","SKJ","9","SKJ9","honningblom","1",1,"Nb, tråkk ca. 20% dekning","MSc"
+"123","24.07.2024","Skjellvik","SKJ","8","SKJ8","honningblom",NA,NA,"","MSc"
+"124","24.07.2024","Skjellvik","SKJ","7","SKJ7","honningblom","1",1,"","MSc"
+"125","24.07.2024","Skjellvik","SKJ","6","SKJ6","honningblom","1",1,"Gammalt tråkk ca 7%","MSc"
+"126","24.07.2024","Skjellvik","SKJ","4","SKJ4","honningblom","1",1,"","MSc"
+"127","24.07.2024","Skjellvik","SKJ","2","SKJ2","honningblom","1",1,"","MSc"
+"128","24.07.2024","Skjellvik","SKJ","1","SKJ1","honningblom",NA,NA,"","MSc"
+"129","25.07.2024","Teneskjær","TEN","5","TEN5","honningblom","1,9,10,11,13,14",6,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"130","25.07.2024","Teneskjær","TEN","5","TEN5","starrslekta","1,2,3,4,5,6,7,8,9,10,11,12,16,15",14,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"131","25.07.2024","Teneskjær","TEN","5","TEN5","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"132","25.07.2024","Teneskjær","TEN","5","TEN5","blåtopp","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"133","25.07.2024","Teneskjær","TEN","5","TEN5","slåttestarr","3,5,8",3,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"134","25.07.2024","Teneskjær","TEN","5","TEN5","rødsvingel","1,6,7,8,9,14",6,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"135","25.07.2024","Teneskjær","TEN","5","TEN5","mjødurt","2,3,7",3,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"136","25.07.2024","Teneskjær","TEN","5","TEN5","engknoppurt","4,5,9,12,13,15,16",7,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"137","25.07.2024","Teneskjær","TEN","5","TEN5","tepperot","4,5,9,11,13",5,"Beite, men mindre enn i de andre,Starrslekta. høy,samlet.","S123"
+"138","25.07.2024","Teneskjær","TEN","1","TEN1","honningblom","3,4,7,8,9,11,12",7,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"139","25.07.2024","Teneskjær","TEN","1","TEN1","blåkoll","1,2,5,9,10,12,13,14,15,16",10,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"140","25.07.2024","Teneskjær","TEN","1","TEN1","engknoppurt","2,4,7,9,10,14,15,16,12",9,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"141","25.07.2024","Teneskjær","TEN","1","TEN1","tepperot","12,16,15,13,10,9,11",7,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"142","25.07.2024","Teneskjær","TEN","1","TEN1","musestarr","1,5,9,13",4,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"143","25.07.2024","Teneskjær","TEN","1","TEN1","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"144","25.07.2024","Teneskjær","TEN","1","TEN1","rødsvingel","1,2,3,4,5,6,7,14,13,9,10,11",12,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"145","25.07.2024","Teneskjær","TEN","1","TEN1","smalkjempe","9",1,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"146","25.07.2024","Teneskjær","TEN","1","TEN1","hjertegras","9,5",2,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"147","25.07.2024","Teneskjær","TEN","1","TEN1","rappslekta","1,3,5,6,7,8,10,11,12,13,15",11,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"148","25.07.2024","Teneskjær","TEN","1","TEN1","sauesvingel","13",1,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"149","25.07.2024","Teneskjær","TEN","1","TEN1","slirestarr","1,14,15,7,11",5,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"150","25.07.2024","Teneskjær","TEN","1","TEN1","tusengylden","10",1,"F 1, v 2, v 7, f1, v1, f 2, v 1, f 1, v 2, 
+Poa sp: samlet
+","S123"
+"151","25.07.2024","Teneskjær","TEN","2","TEN2","honningblom",NA,NA,"","not sampled"
+"152","25.07.2024","Teneskjær","TEN","9","TEN9","honningblom",NA,NA,"","not sampled"
+"153","25.07.2024","Teneskjær","TEN","10","TEN10","honningblom",NA,NA,"","not sampled"
+"154","25.07.2024","Teneskjær","TEN","11","TEN11","honningblom",NA,NA,"","not sampled"
+"155","25.07.2024","Teneskjær","TEN","15","TEN15","honningblom",NA,NA,"","not sampled"
+"156","25.07.2024","Teneskjær","TEN","13","TEN13","honningblom",NA,NA,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"157","25.07.2024","Teneskjær","TEN","13","TEN13","blåkoll","2,3,8,11,14,15",6,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"158","25.07.2024","Teneskjær","TEN","13","TEN13","knopparve","11",1,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"159","25.07.2024","Teneskjær","TEN","13","TEN13","tiriltunge","8",1,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"160","25.07.2024","Teneskjær","TEN","13","TEN13","strandbalderbrå","5,6",2,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"161","25.07.2024","Teneskjær","TEN","13","TEN13","engknoppurt","10,3",2,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"162","25.07.2024","Teneskjær","TEN","13","TEN13","tusengylden","1,4,5,9,15",5,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"163","25.07.2024","Teneskjær","TEN","13","TEN13","ryllsiv","5,13",2,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"164","25.07.2024","Teneskjær","TEN","13","TEN13","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"165","25.07.2024","Teneskjær","TEN","13","TEN13","rødsvingel","1,2,3,4,5,6,7,8,10,11,12,13,14,15,16",15,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"166","25.07.2024","Teneskjær","TEN","13","TEN13","slirestarr","15,9,12",3,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"167","25.07.2024","Teneskjær","TEN","13","TEN13","starrslekta","7,16,15",3,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"168","25.07.2024","Teneskjær","TEN","13","TEN13","sivslekta","8,12,16",3,"C. Sp. Små, lysegrønne blad, rødbrune slirer","S123"
+"169","25.07.2024","Teneskjær","TEN","12","TEN12","honningblom",NA,NA,"Nonsblom usikker","S123"
+"170","25.07.2024","Teneskjær","TEN","12","TEN12","engknoppurt","1",1,"Nonsblom usikker","S123"
+"171","25.07.2024","Teneskjær","TEN","12","TEN12","blåkoll","1,3,5",3,"Nonsblom usikker","S123"
+"172","25.07.2024","Teneskjær","TEN","12","TEN12","åkerstemorsblom","1,2,6",3,"Nonsblom usikker","S123"
+"173","25.07.2024","Teneskjær","TEN","12","TEN12","nonsblom","1,16",2,"Nonsblom usikker","S123"
+"174","25.07.2024","Teneskjær","TEN","12","TEN12","rødsvingel","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Nonsblom usikker","S123"
+"175","25.07.2024","Teneskjær","TEN","12","TEN12","tusengylden","2,16,3",3,"Nonsblom usikker","S123"
+"176","25.07.2024","Teneskjær","TEN","12","TEN12","smalkjempe","2",1,"Nonsblom usikker","S123"
+"177","25.07.2024","Teneskjær","TEN","12","TEN12","øyentrøstslekta","2,8",2,"Nonsblom usikker","S123"
+"178","25.07.2024","Teneskjær","TEN","12","TEN12","tiriltunge","2",1,"Nonsblom usikker","S123"
+"179","25.07.2024","Teneskjær","TEN","12","TEN12","kornstarr","3,4,5,6,7,8,9,10,11,12,13,14,15,16",14,"Nonsblom usikker","S123"
+"180","25.07.2024","Teneskjær","TEN","12","TEN12","slirestarr","4,6,13,16",4,"Nonsblom usikker","S123"
+"181","25.07.2024","Teneskjær","TEN","12","TEN12","strandkjempe","9,12,16",3,"Nonsblom usikker","S123"
+"182","25.07.2024","Teneskjær","TEN","12","TEN12","løvetannslekta","14",1,"Nonsblom usikker","S123"
+"183","25.07.2024","Teneskjær","TEN","8","TEN8","honningblom","10",1,"A. Odoratum usikker","S123"
+"184","25.07.2024","Teneskjær","TEN","8","TEN8","kornstarr","1,2,12,13,14,3,4,15,16,6,5,7,8,9,10,11",16,"A. Odoratum usikker","S123"
+"185","25.07.2024","Teneskjær","TEN","8","TEN8","slirestarr","1,2,11,15,14",5,"A. Odoratum usikker","S123"
+"186","25.07.2024","Teneskjær","TEN","8","TEN8","rødsvingel","1,2,16,15,7",5,"A. Odoratum usikker","S123"
+"187","25.07.2024","Teneskjær","TEN","8","TEN8","blåtopp","2,3,5,6,7,8,9,10,11,12,14,15,16",13,"A. Odoratum usikker","S123"
+"188","25.07.2024","Teneskjær","TEN","8","TEN8","tepperot","2,5,6,9,10,11,12,13,14",9,"A. Odoratum usikker","S123"
+"189","25.07.2024","Teneskjær","TEN","8","TEN8","engknoppurt","3,6,7,9,10,12,13,14,15",9,"A. Odoratum usikker","S123"
+"190","25.07.2024","Teneskjær","TEN","8","TEN8","gulaks","4,8,10,11,12",5,"A. Odoratum usikker","S123"
+"191","25.07.2024","Teneskjær","TEN","8","TEN8","vill-lin","5,9",2,"A. Odoratum usikker","S123"
+"192","25.07.2024","Teneskjær","TEN","8","TEN8","sandarve","9",1,"A. Odoratum usikker","S123"
+"193","25.07.2024","Teneskjær","TEN","8","TEN8","rødkløver","11,15",2,"A. Odoratum usikker","S123"
+"194","25.07.2024","Teneskjær","TEN","8","TEN8","hjertegras","11,12",2,"A. Odoratum usikker","S123"
+"195","25.07.2024","Teneskjær","TEN","8","TEN8","blåkoll","13,15",2,"A. Odoratum usikker","S123"
+"196","25.07.2024","Teneskjær","TEN","8","TEN8","ryllsiv","13,14",2,"A. Odoratum usikker","S123"
+"197","25.07.2024","Teneskjær","TEN","8","TEN8","tusengylden","14",1,"A. Odoratum usikker","S123"
+"198","25.07.2024","Teneskjær","TEN","7","TEN7","engknoppurt","3,4,5,6,8,13,14,15,16,12",10,"","S123"
+"199","25.07.2024","Teneskjær","TEN","7","TEN7","klourt","4",1,"","S123"
+"200","25.07.2024","Teneskjær","TEN","7","TEN7","rødsvingel","1,2,3,4,6,7,16",7,"","S123"
+"201","25.07.2024","Teneskjær","TEN","7","TEN7","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"","S123"
+"202","25.07.2024","Teneskjær","TEN","7","TEN7","tusengylden","2,9,4,10,6,7,12,13",8,"","S123"
+"203","25.07.2024","Teneskjær","TEN","7","TEN7","strandkjempe","3,4,5,7,8,16,14",7,"","S123"
+"204","25.07.2024","Teneskjær","TEN","7","TEN7","slirestarr","3,4,5,6,7,8,9,10,11,12,13,14,15,16",14,"","S123"
+"205","25.07.2024","Teneskjær","TEN","7","TEN7","hjertegras","8",1,"","S123"
+"206","25.07.2024","Teneskjær","TEN","7","TEN7","åkerstemorsblom","4",1,"","S123"
+"207","25.07.2024","Teneskjær","TEN","7","TEN7","sauesvingel","5,6,7,9,10,11,12,13,14,15,16",11,"","S123"
+"208","25.07.2024","Teneskjær","TEN","7","TEN7","blåkoll","7,8,10,14,15",5,"","S123"
+"209","25.07.2024","Teneskjær","TEN","7","TEN7","gjeldkarve","8",1,"","S123"
+"210","25.07.2024","Teneskjær","TEN","7","TEN7","gulaks","10,12",2,"","S123"
+"211","25.07.2024","Teneskjær","TEN","7","TEN7","tepperot","11",1,"","S123"
+"212","25.07.2024","Teneskjær","TEN","7","TEN7","øyentrøstslekta","12,16",2,"","S123"
+"213","25.07.2024","Teneskjær","TEN","7","TEN7","krattalant","12",1,"","S123"
+"214","25.07.2024","Teneskjær","TEN","7","TEN7","vill-lin","16",1,"","S123"
+"215","25.07.2024","Teneskjær","TEN","6","TEN6","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Carex sp, lysegrønn smale blader","S123"
+"216","25.07.2024","Teneskjær","TEN","6","TEN6","rødsvingel","1,2,3,4,7,8,9,13",8,"Carex sp, lysegrønn smale blader","S123"
+"217","25.07.2024","Teneskjær","TEN","6","TEN6","enghavre","5",1,"Carex sp, lysegrønn smale blader","S123"
+"218","25.07.2024","Teneskjær","TEN","6","TEN6","hjertegras","10,2",2,"Carex sp, lysegrønn smale blader","S123"
+"219","25.07.2024","Teneskjær","TEN","6","TEN6","starrslekta","1,2,3,4,7,6,8,9,10,11,12,13,14,15,16",15,"Carex sp, lysegrønn smale blader","S123"
+"220","25.07.2024","Teneskjær","TEN","6","TEN6","slirestarr","5,15",2,"Carex sp, lysegrønn smale blader","S123"
+"221","25.07.2024","Teneskjær","TEN","6","TEN6","blåkoll","8",1,"Carex sp, lysegrønn smale blader","S123"
+"222","25.07.2024","Teneskjær","TEN","6","TEN6","mjødurt","16,9,10,11,12,13,14",7,"Carex sp, lysegrønn smale blader","S123"
+"223","25.07.2024","Teneskjær","TEN","6","TEN6","tepperot","4,7,8",3,"Carex sp, lysegrønn smale blader","S123"
+"224","25.07.2024","Teneskjær","TEN","6","TEN6","engknoppurt","3,4,8,10,11,14,16",7,"Carex sp, lysegrønn smale blader","S123"
+"225","25.07.2024","Teneskjær","TEN","6","TEN6","gulaks","13",1,"Carex sp, lysegrønn smale blader","S123"
+"226","25.07.2024","Teneskjær","TEN","3","TEN3","honningblom","1,2,3,5,6,7,9,10,12,13,14,15,16",13,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"227","25.07.2024","Teneskjær","TEN","3","TEN3","engknoppurt","1,2,10,11,14,16,7,8,12,15",10,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"228","25.07.2024","Teneskjær","TEN","3","TEN3","kornstarr","1,2,12,13,3,14,15,4,5,16,6,7,8,9,11,10",16,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"229","25.07.2024","Teneskjær","TEN","3","TEN3","fuglevikke","1",1,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"230","25.07.2024","Teneskjær","TEN","3","TEN3","tepperot","1,2,5,6,7,8,9,11,12,13,15,16",12,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"231","25.07.2024","Teneskjær","TEN","3","TEN3","rødsvingel","1,2,3,4,5,6,7,8,9,10,11,12,14,15,16",15,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"232","25.07.2024","Teneskjær","TEN","3","TEN3","blåtopp","2,3,4,6,7,11,15,16",8,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"233","25.07.2024","Teneskjær","TEN","3","TEN3","åkerstemorsblom","2,6",2,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"234","25.07.2024","Teneskjær","TEN","3","TEN3","tusengylden","4,5,9,10",4,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"235","25.07.2024","Teneskjær","TEN","3","TEN3","blåkoll","4,8,14,16",4,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"236","25.07.2024","Teneskjær","TEN","3","TEN3","slirestarr","4",1,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"237","25.07.2024","Teneskjær","TEN","3","TEN3","tiriltunge","5",1,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"238","25.07.2024","Teneskjær","TEN","3","TEN3","hjertegras","5,12",2,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"239","25.07.2024","Teneskjær","TEN","3","TEN3","starrslekta","5",1,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"240","25.07.2024","Teneskjær","TEN","3","TEN3","storarve","2,6",2,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"241","25.07.2024","Teneskjær","TEN","3","TEN3","gulaks","10,11,13",3,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"242","25.07.2024","Teneskjær","TEN","3","TEN3","strandkjempe","11",1,"V:11,3,2,3,8,2,16,2,2,2,2,5,1
+F:1,5,6,2,1,1,3,2
+Fertile planter er beitet
+Carex sp. Lysegrønne smale blad","S123"
+"243","25.07.2024","Teneskjær","TEN","4","TEN4","honningblom","1,5,6,7,8,9,10,11,13,15",10,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"244","25.07.2024","Teneskjær","TEN","4","TEN4","kornstarr","1,2,12,13,14,3,4,15,16,5,6,7,8,10,11,9",16,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"245","25.07.2024","Teneskjær","TEN","4","TEN4","rødsvingel","1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,15",16,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"246","25.07.2024","Teneskjær","TEN","4","TEN4","tepperot","1,4,5,8,9,13,14,15",8,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"247","25.07.2024","Teneskjær","TEN","4","TEN4","hjertegras","1,3,9",3,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"248","25.07.2024","Teneskjær","TEN","4","TEN4","engknoppurt","1,3,4,6,13,15",6,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"249","25.07.2024","Teneskjær","TEN","4","TEN4","blåkoll","1,8,10,13,14,16",6,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"250","25.07.2024","Teneskjær","TEN","4","TEN4","slirestarr","1,9,11,12,16",5,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"251","25.07.2024","Teneskjær","TEN","4","TEN4","blåtopp","2,3,4,5,6,7,8,11,12,13,14,15,16",13,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"252","25.07.2024","Teneskjær","TEN","4","TEN4","hundegras","3,10",2,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"253","25.07.2024","Teneskjær","TEN","4","TEN4","sløke","10",1,"V:1,7,2,1,6,7,3,6,7,7,2
+F:3","S123"
+"254","25.07.2024","Teneskjær","TEN","14","TEN14","honningblom",NA,NA,"Starrslekta er samme som i rute 5, samlet","S123"
+"255","25.07.2024","Teneskjær","TEN","14","TEN14","tepperot","1,2,3,7,8,9,10,12,15,16",10,"Starrslekta er samme som i rute 5, samlet","S123"
+"256","25.07.2024","Teneskjær","TEN","14","TEN14","engknoppurt","5,9,11,15",4,"Starrslekta er samme som i rute 5, samlet","S123"
+"257","25.07.2024","Teneskjær","TEN","14","TEN14","sivslekta","2",1,"Starrslekta er samme som i rute 5, samlet","S123"
+"258","25.07.2024","Teneskjær","TEN","14","TEN14","musestarr","1",1,"Starrslekta er samme som i rute 5, samlet","S123"
+"259","25.07.2024","Teneskjær","TEN","14","TEN14","fjæresivaks","6,5",2,"Starrslekta er samme som i rute 5, samlet","S123"
+"260","25.07.2024","Teneskjær","TEN","14","TEN14","kornstarr","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Starrslekta er samme som i rute 5, samlet","S123"
+"261","25.07.2024","Teneskjær","TEN","14","TEN14","blåtopp","5,9,12,13,14,16",6,"Starrslekta er samme som i rute 5, samlet","S123"
+"262","25.07.2024","Teneskjær","TEN","14","TEN14","slirestarr","3,7,8,10",4,"Starrslekta er samme som i rute 5, samlet","S123"
+"263","25.07.2024","Teneskjær","TEN","14","TEN14","starrslekta","1,6,8,9,11,12,13,14",8,"Starrslekta er samme som i rute 5, samlet","S123"
+"264","25.07.2024","Teneskjær","TEN","14","TEN14","storblåfjær","7",1,"Starrslekta er samme som i rute 5, samlet","S123"
+"265","25.07.2024","Teneskjær","TEN","14","TEN14","rødsvingel","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16,"Starrslekta er samme som i rute 5, samlet","S123"
+"266","25.07.2024","Teneskjær","TEN","14","TEN14","sløke","9",1,"Starrslekta er samme som i rute 5, samlet","S123"
+"267","25.07.2024","Teneskjær","TEN","14","TEN14","svartor","4,16",2,"Starrslekta er samme som i rute 5, samlet","S123"
