@@ -32,6 +32,7 @@ library(readxl)
 library(tidyverse)
 library(vegan)
 library(ggrepel)
+library(goeveg)
 ```
 
 ## Load data
@@ -111,18 +112,20 @@ df_groups <- df_nmds %>%
 df_species_rel <-         
   decostand(df_species, method = "total")
 
+df_species_rel = as.matrix(df_species_rel)
+
 # Calculating distances
-df_distmat <- 
-  vegdist(df_species_rel, method = "bray")
+#df_distmat <- 
+#  vegdist(df_species_rel, method = "bray")
 
 # Create matrix
-df_distmat <- 
-  as.matrix(df_distmat, labels = T)
+#df_distmat <- 
+#  as.matrix(df_distmat, labels = T)
 #write.csv(island.spp_distmat, "island_spp_distmat.csv")
 
 # Running NMDS
 NMDS <-
-  metaMDS(df_distmat,
+  metaMDS(df_species_rel,
           distance = "bray",
           k = 3,
           maxit = 999, 
@@ -134,25 +137,36 @@ stressplot(NMDS)#Creates stress plot
 #Making a quick plot
 plot(NMDS, "sites")
 
-#Extract NMDS scores and combine with grouping variables
-df_nmds_scores = as.data.frame(scores(NMDS))
-df_nmds_scores <- bind_cols(df_groups, df_nmds_scores)
+#Extract scores
+data.scores = as.data.frame(scores(NMDS)$sites)
+data.species = as.data.frame(scores(NMDS)$species)
 
-#Making a nice ggplot
+#Add grouping variables to data.scores
 
-NMDS.plot <- ggplot(df_nmds_scores, aes(x = NMDS1, y = NMDS2))+
-  geom_point(size = 4, aes(colour = Locality, shape = as.factor(Presence_H_monorchis)))+
+df_nmds_scores <- bind_cols(df_groups, data.scores)
+
+limited <- ordiselect(df_species, NMDS, ablim = 0.1)#extracts the 10% most aundant species
+df_nmds_species <- data.species %>% 
+  filter(row.names(data.species) %in% limited)
+#Convert rownames to column
+df_nmds_species$Species <- rownames(df_nmds_species)
+
+#Create a ggplot
+NMDS.plot <- ggplot()+
+  geom_point(data = df_nmds_scores, aes(x = NMDS1, y = NMDS2, colour = Locality, shape = as.factor(Presence_H_monorchis)), size = 4)+
+  geom_text(data= df_nmds_species, aes(x= NMDS1, y = NMDS2, label = Species), alpha = 0.2)+
   theme(axis.text.y = element_text(size = 12), 
         axis.text.x = element_text(size = 12), 
         legend.text = element_text(size = 12), 
         legend.position = "right") +
   theme_classic()+
   labs(x = "NMDS1", y = "NMDS2") +
-  geom_text_repel(aes(label = Plot_ID_new), size=2)+
+  geom_text_repel(data = df_nmds_scores, aes(x = NMDS1, y = NMDS2, label = Plot_ID_new), size=2, alpha = 1)+
   guides(colour = guide_legend(title="Lokalitet"), 
-         shape = guide_legend("Forekomst i ruten"))+
+         shape = guide_legend("Honningblom"))+
   scale_shape_manual(values = c(21,19), 
-                     labels = c("Uten", "Med"))
+                     labels = c("Fraværende", "Til stede"))+
+  scale_color_manual(values=c("#004F71","#008C95","#E57200","#93328E"))
 
 NMDS.plot
 
