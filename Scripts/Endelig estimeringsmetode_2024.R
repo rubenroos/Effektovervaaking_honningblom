@@ -1,48 +1,18 @@
----
-title: "Population estimates for Herminium monorchis"
-author: "Norwegian institute for nature research"
-date: "10/03/2024"
-format: pdf
-pdf-engine: pdflatex
----
+# Estimering av størrelsen av fire honningblom populasjonser basert på
+# linje og rose design, der det på grunn av datagrunnlaget benyttes ulike
+# tilnærminger for de fire populasjonene.
 
-## About
-
-This script estimates population sizes of H. monorchis at the four localities on Hvaler, Norway.
-
-## Language settings
-
-Before getting started, we can run this line to make sure R can read Norwegian letters.
-
-```{r}
- #| label: Language settings 
- #| warning: false
-
+# Fix problems with norwegian names
 Sys.setlocale(locale='no_NB.utf8')
-```
 
-## Packages
-
-Load required packages
-
-```{r}
- #| label: Language settings 
- #| warning: false
+# Last inn nødvendige R-pakker, eget funksjonsbibliotek og data.
 
 library(boot)
 library(rio)
-library(reshape2)
-```
 
-## Functions library
-
-We first create a function library with the required functions. These are commented in Norwegian.
-
-```{r}
- #| label: Function library 
- #| warning: false
-
-
+################################################################################
+# Funksjons-bibliotek
+################################################################################
 
 estim.fa.linje <- function(lengde,bredde,andeler) {
   return(lengde*bredde*andeler)
@@ -190,7 +160,7 @@ estim.pop.size <- function(transektruteserier = NULL,
   # Estimer populasjonsstørrelsene for hvert år som 
   # forekomstareal * tettheten  innenfor forekomstarealet.
   
-  if (design == "Line") {
+  if (design == "Linje") {
     
     
     andeler <- colMeans(transektruteserier)
@@ -239,76 +209,70 @@ estim.pop.size <- function(transektruteserier = NULL,
   return(list(popsize = popsize, fa = fa))
 }
 
-```
+################################################################################
+# Data
+################################################################################
 
-## Data import
+#lokalitetsdata <- import("Data/Honningblom_2022.xlsx",sheet="Lokalitetsdata",na=c("NA"))
+#transektdata <- import("Data/Honningblom_2022.xlsx",sheet="transektdata",na=c("NA"," "))
+#rutedata <- import("Data/Honningblom_2022.xlsx",sheet="Honningblom_data",na=c("NA"))
 
-Let's import the data. There are three data files needed. The first contains data on the localities. The second contains observations of H. monorchis along transects. The last contains data on H. monorchis in the plots.
+###### Ny kode #################
+getwd()
+lokalitetsdata <- import("Data/Honningblom_2024_copy.xlsx",sheet="Lokalitetsdata",na=c("NA"))
+transektdata <- import("Data/Honningblom_2024_copy.xlsx",sheet="transektdata",na=c("NA"," "))
+rutedata <- import("Data/Honningblom_2024_copy.xlsx",sheet="Honningblom_data",na=c("NA"))
 
-```{r}
- #| label: Function library 
- #| warning: false
+#lokalitetsdata$År <- lokalitetsdata$Year # Går tilbake til opprinnelige variabelnavnene fra i fjor
+#rutedata$Ar <- rutedata$Year
+#transektdata$År <- transektdata$Year
 
-df_locality <- import("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_monorchis_masterfile_v_2024.xlsx",sheet="Locality",na=c("NA"))
+sort(unique(rutedata$Rute.ID))
 
-df_transect <- import("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_monorchis_masterfile_v_2024.xlsx",sheet="Transect",na=c("NA"," "))
+# Allokerer nye ID til ruter som mangler ID
 
-df_plot <- import("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_monorchis_masterfile_v_2024.xlsx",sheet="Plot_herminium",na=c("NA"))
-```
+rutedata$Rute.ID_orig <- rutedata$Rute.ID # Tar vare på opprinnelig input
 
-## Data wrangling
+rutedata$Rute.ID[rutedata$Rute == "SKI.10.A"] <- "SKI10"
+rutedata$Rute.ID[rutedata$Rute == "SKI.5.A"] <- "SKI5"
+rutedata$Rute.ID[rutedata$Rute == "SKX.2.A"] <- "SKJ51"
+rutedata$Rute.ID[rutedata$Rute == "SKX.4.A"] <- "SKJ52"
+rutedata$Rute.ID[rutedata$Rute == "SKX.5.A"] <- "SKJ53"
+rutedata$Rute.ID[rutedata$Rute == "SKX.9.A"] <- "SKJ54"
+rutedata$Rute.ID[rutedata$Rute == "SKY.1.A"] <- "SKJ55"
+rutedata$Rute.ID[rutedata$Rute == "SKY.5.A"] <- "SKJ56"
+rutedata$Rute.ID[rutedata$Rute == "SKY.6.A"] <- "SKJ57"
+rutedata$Rute.ID[rutedata$Rute == "SKY.8.A"] <- "SKJ58"
 
-Before we can start the analyses, the data needs to be manipulated somewhat.
+rutedata$Rute_orig <- rutedata$Rute # Tar vare på opprinnelig input
+rutedata$Rute <- rutedata$Rute.ID # Kopierer variabler for å unngå rekoding senere i skriptet
 
-```{r}
- #| label: Data wrangling
- #| warning: false
+table(sort(rutedata$Rute)) # Sjekk
 
-#sort(unique(df_plot$Plot_ID_new))
+###### Slutt ny kode #################
 
-# Allocate new plot IDs to plots that lack an identifier.
 
-df_plot$Plot_ID_orig <- df_plot$Plot_ID_new # Tar vare på opprinnelig input
+################################################################################
+# Script
+################################################################################
 
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKI.10.A"] <- "SKI10"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKI.5.A"] <- "SKI5"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKX.2.A"] <- "SKJ51"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKX.4.A"] <- "SKJ52"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKX.5.A"] <- "SKJ53"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKX.9.A"] <- "SKJ54"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKY.1.A"] <- "SKJ55"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKY.5.A"] <- "SKJ56"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKY.6.A"] <- "SKJ57"
-df_plot$Plot_ID_new[df_plot$Plot_ID_old == "SKY.8.A"] <- "SKJ58"
-
-#rutedata$Rute_orig <- rutedata$Rute # Tar vare på opprinnelig input
-#rutedata$Rute <- rutedata$Rute.ID # Kopierer variabler for å unngå rekoding senere i skriptet
-
-#table(sort(df_plot$Plot_ID_new)) # Check
-```
-
-## Population estimates
-
-Run the script to estimate population size for each locality.
-
-```{r}
 # Les, initier og beregn designvariabler - felles kode for alle lokaliteter.
 
-roser <- unique(df_locality$Locality[df_locality$Design == "Rose"])
-linjer <- unique(df_locality$Locality[df_locality$Design == "Line"])
+roser <- unique(lokalitetsdata$Lokalitet[lokalitetsdata$Design == "Rose"])
+linjer <- unique(lokalitetsdata$Lokalitet[lokalitetsdata$Design == "Linje"])
 forekomst.transekt <- rep("",length(c(roser,linjer)))
 transekt.rute.lengde <- transekt.rute.bredde <- rep(0,length(c(roser,linjer)))
 names(forekomst.transekt) <- names(transekt.rute.lengde) <- names(transekt.rute.bredde) <- c(roser,linjer)
-forekomst.transekt[roser] <- "Number_half_m_presence"
-forekomst.transekt[linjer] <- "Number_m_presence"
+forekomst.transekt[roser] <- "Ant.0,5 m.med"
+forekomst.transekt[linjer] <- "Ant.m.med"
 transekt.rute.lengde[roser] <- transekt.rute.bredde[roser] <- 0.5
 transekt.rute.lengde[linjer] <- 1
 transekt.rute.bredde[linjer] <- 0.5
 analyse.rute.lengde <- transekt.rute.bredde
-forekomst.avstand <- "Presence_m"
+forekomst.avstand <- "Forekomst honningblom (m)"
 n.analyseruter.per.transektruter <- transekt.rute.lengde / analyse.rute.lengde
 
-localities <- unique(df_locality$Locality)
+localities <- unique(lokalitetsdata$Lokalitet)
 nboot <- 2000  # Antall simuleringer
 grense <- 0.05 # Når andelen transektruter med Honningblom er mindre enn grense,
 # gjennomføres parametrisk estimering av forekomstarealet. Kan 
@@ -325,13 +289,13 @@ for (loc in localities) {
   #    navngi rutene.
   # 3) Lag matrisa og fyll den med presence/absence data
   
-  transectyears <- sort(unique(df_locality$Year[df_locality$Locality == loc]))
-  design <- unique(df_locality[df_locality$Locality==loc,"Design"])
-  transects <- df_transect[df_transect$Locality == loc,]
-  transects$names <- paste(transects$Locality,transects$Transect_ID,sep = "_")
-  transektbredde <- df_locality[df_locality$Locality==loc,"Transect_width"] [1]#Hvis dette ikke heter "Transektbredde" i datafilen, forårsaker det en feil. Usikker hvor det da må endres til "Transect_width" også?
+  transectyears <- sort(unique(lokalitetsdata$Year[lokalitetsdata$Lokalitet == loc]))
+  design <- unique(lokalitetsdata[lokalitetsdata$Lokalitet==loc,"Design"])
+  transects <- transektdata[transektdata$Lokalitet == loc,]
+  transects$names <- paste(transects$Lokalitet,transects$Transekt,sep = "_")
+  transektbredde <- lokalitetsdata[lokalitetsdata$Lokalitet==loc,"Transektbredde"] [1]
   
-  transektlengder <-  as.numeric(transects$Transect_length)
+  transektlengder <-  as.numeric(transects$`Lengde (m)`)
   transektrutenavn <- NULL
   for (tname in unique(transects$names)) {
     rutesequence <- 1:as.integer(transektlengder[transects$names == tname][1]/
@@ -365,7 +329,7 @@ for (loc in localities) {
   # nødvendig for å inkludere analyserutene som i starten var utenfor 
   # forekomstarealet, men som senere blir en del av det.
   
-  analyse.rute.data <- df_plot[df_plot$Locality == loc,]
+  analyse.rute.data <- rutedata[rutedata$Lokalitet == loc,]
   
   ####################################################################################
   #### Her er roten til alt ondt i 2022! Koden nedenfor er en ad hoc tilpasning til fjorårets
@@ -380,13 +344,13 @@ for (loc in localities) {
   #### Koden på linjene 231 - 245 medfører at ingen ruter mangler navn slik at koden på
   #### linjer 343 - 344 blir overflødig. Men jeg lar den likevel stå.
   
-#mangler.navn <- is.na(analyse.rute.data$Plot_ID_old)
-#analyse.rute.data$Plot_ID_old[mangler.navn] <- analyse.rute.data$Plot_ID_new[mangler.navn]
+  mangler.navn <- is.na(analyse.rute.data$Rute)
+  analyse.rute.data$Rute[mangler.navn] <- analyse.rute.data$Rute.ID[mangler.navn]
   
   #### Slutt på alt ondt!
   ####################################################################################
   
-  analyseruter <- sort(unique(analyse.rute.data$Plot_ID_new))
+  analyseruter <- sort(unique(analyse.rute.data$Rute))
   years <- sort(unique(analyse.rute.data$Year))
   
   analyseruteserier <- matrix(NA,nrow = length(analyseruter),
@@ -394,16 +358,16 @@ for (loc in localities) {
   dimnames(analyseruteserier)[[1]] <- analyseruter
   dimnames(analyseruteserier)[[2]] <- years
   fertilitetsserier <- sterilitetsserier <- analyseruteserier
-  tetthet <- round(analyse.rute.data$Herminium_count_total/analyse.rute.data$Plot_size)
-  fert.tetthet <- round(analyse.rute.data$Herminium_count_fertile/analyse.rute.data$Plot_size)
+  tetthet <- round(analyse.rute.data$Ant.individer/analyse.rute.data$Rutestrl)
+  fert.tetthet <- round(analyse.rute.data$Ant.fertile/analyse.rute.data$Rutestrl)
   veg.tetthet <- tetthet - fert.tetthet
   
   for (i in 1:length(tetthet)) {
-    analyseruteserier[analyse.rute.data$Plot_ID_new[i],
+    analyseruteserier[analyse.rute.data$Rute[i],
                       as.character(analyse.rute.data$Year[i])] <- tetthet[i]
-    fertilitetsserier[analyse.rute.data$Plot_ID_new[i],
+    fertilitetsserier[analyse.rute.data$Rute[i],
                       as.character(analyse.rute.data$Year[i])] <- fert.tetthet[i]
-    sterilitetsserier[analyse.rute.data$Plot_ID_new[i],
+    sterilitetsserier[analyse.rute.data$Rute[i],
                       as.character(analyse.rute.data$Year[i])] <- veg.tetthet[i]
   }
   
@@ -424,8 +388,8 @@ for (loc in localities) {
   names(minsize) <- years
   minfert <- minsize
   for(year in years) {
-    minsize[year] <- sum(analyse.rute.data$Herminium_count_total[analyse.rute.data$Year == as.integer(year)],na.rm = T)
-    minfert[year] <- sum(analyse.rute.data$Herminium_count_fertile[analyse.rute.data$Year == as.integer(year)],na.rm = T)
+    minsize[year] <- sum(analyse.rute.data$Ant.individer[analyse.rute.data$Year == as.integer(year)],na.rm = T)
+    minfert[year] <- sum(analyse.rute.data$Ant.fertile[analyse.rute.data$Year == as.integer(year)],na.rm = T)
   }
   
   # For Skjellvik populasjonen gjøres antagelsen at transekt-datasettet fra 2021 
@@ -595,16 +559,67 @@ for (loc in localities) {
 }
 
 print(pop)
-#sink('pop2024.txt')
-#print(pop)
-#sink()
-```
+sink('pop2024.txt')
+print(pop)
+sink()
 
-## Exporting data
+# Figurer
 
-Let's export the pop data we need as a data.frame.
+years <- sizes <- NULL
+for (loc in localities) {
+  years <- c(years, as.integer(dimnames(pop[[loc]]$size)[[2]]))
+  sizes <- c(sizes, log(pop[[loc]]$size["97.5%",]))
+}
+xlimits <- c(min(years) - 0.5, max(years) + 0.5)
+ylimits <- c(0, max(sizes) + 0.5)
 
-```{r}
+#if(!dir.exists("Figurer")) dir.create("Figurer")
+#pdf(paste("Figurer/","Alle lokaliteter log",".pdf",sep=""))
+
+#pdf("Figures/Alle lokaliteter 2022.pdf") 
+png("Figures/Alle lokaliteter 2024.png", width = 840, height = 840)
+par(mfrow=c(2,2))
+for (loc in localities) {
+  plot(as.integer(dimnames(pop[[loc]]$size)[[2]]), 
+       log(pop[[loc]]$size["est",]),
+       col=1,pch=19,cex=1,type="o",
+       ylim=ylimits,xlim=xlimits,
+       xlab = expression(Aar), 
+       ylab = "Antall individer", axes = F,cex.lab=1.25,
+       main=loc)
+  axis(1,
+       at=c(xlimits[1],(xlimits[1]+0.5):(xlimits[2]-0.5)),
+       labels = c("",as.character((xlimits[1]+0.5):(xlimits[2]-0.5))),
+       pos=0,
+       cex.lab=1.25, 
+       cex.axis=1.25)
+  axis(2,
+       at=c(0,log(c(10,100,1000,10000,exp(ylimits[2])))),
+       labels = c("",as.character(c(10,100,1000,10000)),""),
+       pos=xlimits[1],
+       cex.lab=1.25, 
+       cex.axis=1.25)
+  polygon(c(as.integer(dimnames(pop[[loc]]$size)[[2]]),rev(as.integer(dimnames(pop[[loc]]$size)[[2]]))),
+          c(log(pop[[loc]]$size["97.5%",]),rev(log(pop[[loc]]$size["2.5%",]))),
+          col=rgb(0.5,0.5,0.5,alpha=0.2),border=NA)
+  points(as.integer(dimnames(pop[[loc]]$fert)[[2]]), 
+         log(pop[[loc]]$fert["est",]),col=2,pch=19,cex=1,type="o")
+  polygon(c(as.integer(dimnames(pop[[loc]]$fert)[[2]]),rev(as.integer(dimnames(pop[[loc]]$fert)[[2]]))),
+          c(log(pop[[loc]]$fert["97.5%",]),rev(log(pop[[loc]]$fert["2.5%",]))),
+          col=rgb(1,0,0,alpha=0.2),border=NA)
+}
+
+dev.off()
+
+
+#### Check if it is possible to make some ggplots ####
+dev.off()
+library(reshape2)
+library(tidyverse)
+library(gganimate)
+library(av)
+library(gifski)
+
 #Get the data (list format) into a dataframe
 df.pop <- data.frame(melt(pop))
 df.pop <- df.pop %>% 
@@ -618,6 +633,146 @@ df.pop <- df.pop %>%
                                                 '97.5%' = "upper")) %>% 
   mutate_if(is.numeric, round, 1)
 
-#Export data
-write.csv(df.pop, "P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_pop_2024.csv")
-```
+#restructure the data so that each estimate is in its own column
+df.pop <- reshape(data = df.pop,
+        idvar = c("Locality", "Pop.variable", "Year"),
+        v.names = c("Value"),
+        timevar = "Estimate",
+        direction = "wide") %>% 
+  mutate(Year = as.integer(Year))
+
+str(df.pop)
+
+p.TEN <- df.pop %>% 
+  dplyr::filter(Pop.variable == "size") %>% 
+  dplyr::filter(Locality == "Teneskjaer") %>% 
+  ggplot(., aes(x = Year, y = Value.est, ymin = Value.lower, ymax = Value.upper)) + 
+  geom_ribbon(alpha = 0.2, fill = "lightblue") + 
+  geom_point(color = "darkblue")+
+  geom_line(color = "darkblue")+
+  scale_x_continuous(breaks = 2014:2024, labels = 2014:2024, expand = c(0,0.1)) +
+  scale_y_continuous(expand = c(0, 0))+
+  theme_classic() + 
+  theme(axis.text.x=element_text(angle = 45, hjust = 1, size = 20), 
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 20), 
+        axis.text.y = element_text(size = 20), 
+        axis.title.y = element_text(size = 20)) +
+  labs(y = "Estimert populasjonsstørrelse") + 
+  ggtitle("Teneskjær")
+
+ggsave("Teneskjaer_2024_static.png", width = 5.4, height = 9.6, units = c("in"), dpi = 300)
+
+p.TEN_anim <- p.TEN + transition_reveal(Year)
+
+#create avi file
+animate(p.TEN_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = av_renderer())
+anim_save("Teneskjaer_2024_animated.avi")
+
+#create gif file
+animate(p.TEN_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = gifski_renderer())
+anim_save("Teneskjaer_2024_animated.gif")
+
+#If wanted, we can logtransfer the the y-axis
+p.TEN + scale_y_continuous(trans='log10')
+
+## Filletassen 
+p.FIL <- df.pop %>% 
+  dplyr::filter(Pop.variable == "size") %>% 
+  dplyr::filter(Locality == "Filletassen") %>% 
+  ggplot(., aes(x = Year, y = Value.est, ymin = Value.lower, ymax = Value.upper)) + 
+  geom_ribbon(alpha = 0.2, fill = "lightblue") + 
+  geom_point(color = "darkblue")+
+  geom_line(color = "darkblue")+
+  scale_x_continuous(breaks = 2014:2024, labels = 2014:2024, expand = c(0,0.1)) +
+  scale_y_continuous(expand = c(0, 0))+
+  theme_classic() + 
+  theme(axis.text.x=element_text(angle = 45, hjust = 1, size = 20), 
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 20), 
+        axis.text.y = element_text(size = 20), 
+        axis.title.y = element_text(size = 20)) +
+  labs(y = "Estimert populasjonsstørrelse") + 
+  ggtitle("Filletassen") 
+
+ggsave("Filletassen_2024_static.png", width = 5.4, height = 9.6, units = c("in"), dpi = 300)
+
+p.FIL_anim <- p.FIL +   transition_reveal(Year)
+
+#create avi file
+animate(p.FIL_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = av_renderer())
+anim_save("Filletassen_2024_animated.avi")
+
+#create gif file
+animate(p.FIL_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = gifski_renderer())
+anim_save("Filletassen_2024_animated.gif")
+
+p.FIL + scale_y_continuous(trans='log10')
+
+## Skipstadsand
+p.SKI <- df.pop %>% 
+  dplyr::filter(Pop.variable == "size") %>% 
+  dplyr::filter(Locality == "Skipstadsand") %>% 
+  ggplot(., aes(x = Year, y = Value.est, ymin = Value.lower, ymax = Value.upper)) + 
+  geom_ribbon(alpha = 0.2, fill = "lightblue") + 
+  geom_point(color = "darkblue")+
+  geom_line(color = "darkblue")+
+  scale_x_continuous(breaks = 2014:2024, labels = 2014:2024, expand = c(0,0.1)) +
+  scale_y_continuous(expand = c(0, 0))+
+  theme_classic() + 
+  theme(axis.text.x=element_text(angle = 45, hjust = 1, size = 20), 
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 20), 
+        axis.text.y = element_text(size = 20), 
+        axis.title.y = element_text(size = 20)) +
+  labs(y = "Estimert populasjonsstørrelse") + 
+  ggtitle("Skipstadsand") 
+
+ggsave("Skipstadsand_2024_static.png", width = 5.4, height = 9.6, units = c("in"), dpi = 300)
+
+p.SKI_anim <- p.SKI + transition_reveal(Year)
+
+#create avi file
+animate(p.SKI_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = av_renderer())
+anim_save("Skipstandsand_2024_animated.avi")
+
+#create gif file
+animate(p.SKI_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = gifski_renderer())
+anim_save("Skipstadsand_2024_animated.gif")
+
+p.SKI + scale_y_continuous(trans='log10')
+
+## Skjellvik
+p.SKJ <- df.pop %>% 
+  dplyr::filter(Pop.variable == "size") %>% 
+  dplyr::filter(Locality == "Skjellvik") %>% 
+  ggplot(., aes(x = Year, y = Value.est, ymin = Value.lower, ymax = Value.upper)) + 
+  geom_ribbon(alpha = 0.2, fill = "lightblue") + 
+  geom_point(color = "darkblue")+
+  geom_line(color = "darkblue")+
+  scale_x_continuous(breaks = 2014:2024, labels = 2014:2024, expand = c(0,0.1)) +
+  scale_y_continuous(expand = c(0, 0))+
+  theme_classic() + 
+  theme(axis.text.x=element_text(angle = 45, hjust = 1, size = 20), 
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, size = 20), 
+        axis.text.y = element_text(size = 20), 
+        axis.title.y = element_text(size = 20)) +
+  labs(y = "Estimert populasjonsstørrelse") + 
+  ggtitle("Skjellvik")
+
+ggsave("Skjellvik_2024_static.png", width = 5.4, height = 9.6, units = c("in"), dpi = 300)
+
+p.SKJ_anim <- p.SKJ + transition_reveal(Year)
+
+#create avi file
+animate(p.SKJ_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = av_renderer())
+anim_save("Skjellvik_2024_animated.avi")
+
+#create gif file
+animate(p.SKJ_anim, duration = 5, fps = 25, width = 540, height = 960, renderer = gifski_renderer())
+anim_save("Skjellvik_2024_animated.gif")
+
+p.SKJ + scale_y_continuous(trans='log10')
+
+

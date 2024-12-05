@@ -1,0 +1,307 @@
+---
+title: "Herminium climate analyses"
+format: html
+editor: visual
+---
+
+## Introduction
+
+This script downloads weather data from NVE and allows for analyses of how *Herminium monorchis* (abundance) responds to weather the previous year.
+
+## Set language settings
+
+```{r}
+#| label: Language settings   
+#| warning: false  
+
+Sys.setlocale(locale='no_NB.utf8')
+```
+
+## Load required packages
+
+Install required packages
+
+```{r}
+#| label: Installing packages
+#| warning: false
+
+library(readxl)
+library(devtools)
+devtools::install_github("thomas-kvalnes/rgts")
+library(rgts)
+library(tidyverse)
+library(sf)
+library(dplyr)
+library(leaflet)
+library(lubridate)
+library(scales)
+```
+
+## Load data
+
+```{r}
+#| label: Load data
+#| warning: false
+
+# First, we create a dataframe with the coordinate we want to use. This coordinate is at Viker, Asmaløy, Hvaler in Fredrikstad municipality. 
+coords_viker <- data.frame(x = 267568, y = 6551444)
+
+#Let's make a quick map to visualise where this is. UTM33N has EPSG: 32633
+
+coor.viker <- data.frame(id = c("1", "2"), coords_viker) %>%
+  st_as_sf(coords=c("x", "y"), crs=32633) %>%
+  st_transform(4326) 
+
+#Make a quick map that shows where the points that delimit the area are
+#coor.viker %>%
+#  leaflet() %>%
+#  addTiles() %>%
+#  addMarkers()
+#Looks good
+
+#Now we can download the data for:
+##Daily precipitation
+##Daily evaporation
+##Daily temperature
+#We need data since 2012. 2012 is used to stabalize the surpluss and is later removed. 
+df_rr <- gts_dl_coords(coords = coords_viker, parameter = "rr", start_date = "2012-01-01", end_date = "2024-10-01")
+df_eva <- gts_dl_coords(coords = coords_viker, parameter = "gwb_eva", start_date = "2012-01-01", end_date = "2024-10-01")
+df_tm <- gts_dl_coords(coords = coords_viker, parameter = "tm", start_date = "2012-01-01", end_date = "2024-10-01")
+
+#Load counts from plots
+df_plot <- read_xlsx("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_monorchis_masterfile_v_2024.xlsx",sheet="Plot_herminium",na=c("NA"))
+
+#Load population estimates data.
+df_pop <- read_csv("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Data/Herminium_pop_2024.csv")
+```
+
+## Data wrangling
+
+Now, let's wrangle some data!! (nerd emoji)
+
+```{r}
+#Check if there are any weird precipitation records
+df_rr %>% 
+  distinct(rr) %>% 
+  arrange(-rr) #55.7mm as max daily precip. This is high, but not unrealistic. 
+
+#Check if there are any weird evaporation records
+df_eva %>% 
+  distinct(gwb_eva) %>% 
+  arrange(-gwb_eva) #4.9 as max, looks fine.
+
+#There is a long period with missing data in 2024 though (11 June through 26 september). For sake of simplicity, we can set these missing values to 1. 
+df_eva <- df_eva %>% 
+  mutate(gwb_eva = tidyr::replace_na(gwb_eva, 1))
+
+#check if there are any weird values for the temperature
+df_tm %>% 
+  distinct(tm) %>% 
+  arrange(tm)#looks fine
+
+#Let's combine all in one df with a nice nested left_join
+df <- left_join(df_tm, df_eva, by = "date") %>% 
+  left_join(., df_rr, by = "date") %>% 
+  select(date, tm, gwb_eva, rr)
+
+#Calculate daily difference between precipitation and evaporation, which is needed to calculate precipitation deficit. 
+
+df <- df %>% 
+  mutate(diff = rr - gwb_eva)
+
+df <- df %>% 
+  mutate(surpluss = rep(first(diff)))
+
+#need a loop to calculate the lags and surpluss, but it works   
+#for (row in 2:dim(df)[1]) {
+#    df[row,] <- mutate(df[1:row,], surpluss = diff + lag(surpluss,1) * 0.825)[row,]
+#}
+
+#Alternative that only applies the 0.825 factor when the value is positive, but leaves negative surpluss as they are. This makes sense as surpluss water can run off, while drought can not. 
+
+for (row in 2:dim(df)[1]) {
+    df[row,] <- mutate(df[1:row,], 
+                       surpluss = diff + ifelse(lag(surpluss, 1) > 0, 
+                                                lag(surpluss, 1) * 0.925, 
+                                                lag(surpluss, 1) * 1)
+                       )[row,]
+}
+
+#Add column with julian day
+df <- df %>% 
+  mutate(Jday = yday(date)) %>% 
+  mutate(year = year(date))
+
+#Remove 2012
+df <- df %>% 
+  filter(!year == "2012")
+
+```
+
+## Visualize precipitation surpluss/defecit
+
+Now we can make a graph to visualize the precipitation deficit.
+
+```{r}
+#| label: Visualization 
+#| warning: false  
+#make a plot for a specific year
+df %>% 
+  filter(year == "2018") %>% 
+  ggplot(aes(x = date, y = surpluss))+
+  geom_point()
+
+#Check if year is as factor
+#df$year <- as.factor(df$year)
+
+p_surpluss_2013_24 <- df %>% 
+  subset(Jday >= 0 & Jday <= 366) %>% 
+  ggplot(aes(x = Jday, y = 1)) +
+  geom_raster(aes(fill=surpluss)) +
+  geom_point(aes(x = Jday, y = 1, color = tm))+
+  facet_wrap(~ as.factor(year), ncol = 1, switch = "y")+
+  theme_classic()+
+  theme(axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), 
+        strip.background = element_blank(), 
+        legend.position="bottom", legend.box = "horizontal") +
+  scale_fill_gradient2(
+    low = "red", 
+    mid = "white", 
+    high = "blue", 
+    midpoint = 0, 
+    name = "Nedbørsoverskudd") +
+  scale_color_gradient2(
+    low = "darkblue", 
+    mid = "gray100", 
+    high = "darkred", 
+    midpoint = 0, 
+    name = "Døgntemperatur")+
+  xlab("Juliansk dato")+
+  ylab(NULL)
+
+
+p_surpluss_2013_24
+
+setwd("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis")
+
+ggsave(plot = p_surpluss_2013_24, "P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Output/Precipitation_surpluss_2013-24.jpeg", width = 22, height = 25, units = "cm")
+
+#Below we use a different version which allows to plot the dates (formatted as abbreviated months) on the x axis. It also introduces a skipped day on the 28. of feburary in years that are not leap years. 
+
+p_surpluss_2013_24_v2 <- df %>% 
+  mutate(year = year(date),
+         month_day = as_date(paste(2020,month(date),day(date), sep = "-"))) %>% 
+  ggplot(aes(x = month_day, y = 1)) +
+  geom_raster(aes(fill=surpluss)) +
+  geom_point(aes(x = month_day, y = 1, color = tm))+
+  facet_wrap(~year, ncol = 1, switch = "y")+
+  theme_classic()+
+  theme(axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), 
+        strip.background = element_blank(), 
+        legend.position="bottom", legend.box = "horizontal") +
+  scale_fill_gradient2(
+    low = "red", 
+    mid = "white", 
+    high = "blue", 
+    midpoint = 0, 
+    name = "Nedbørsoverskudd") +
+  scale_color_gradient2(
+    low = "darkblue", 
+    mid = "gray100", 
+    high = "darkred", 
+    midpoint = 0, 
+    name = "Døgntemperatur")+
+  xlab("Dato")+
+  ylab(NULL) +
+  scale_x_date(labels = date_format('%b'), breaks = date_breaks("1 month"))
+
+p_surpluss_2013_24_v2
+
+setwd("P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis")
+
+ggsave(plot = p_surpluss_2013_24_v2, "P:/154027_effektovervaking_av_trua_arter_og_naturtyper_2024/04 Honningblom/Herminium monorchis/Output/Precipitation_surpluss_2013-24_v2.jpeg", width = 22, height = 25, units = "cm")
+
+```
+
+## Use weather data to predict abundance of honningblom
+
+We first need to manipulate the weather and population data a bit.
+
+```{r}
+#| label: Calculate monthly data
+#| warning: false 
+
+#Create a column with month
+df <- df %>% 
+  mutate(month = month(date))
+
+#Calculate monthly averages for the weather variables. 
+df_agg_clim <- df %>% 
+  group_by(year, month) %>% 
+  summarize(tm = mean(tm), 
+            gwb_eva = mean(gwb_eva), 
+            rr = sum(rr), 
+            surpluss = mean(surpluss))
+
+#Now we want to calculate the average summer values, and add values for the weather valuables of year n-1. 
+df_agg_clim <- df_agg_clim %>% 
+  filter(month >= 5 & month <= 8) %>% 
+  group_by(year) %>% 
+  summarize(tm = mean(tm), 
+            gwb_eva = mean(gwb_eva), 
+            rr = sum(rr), 
+            surpluss = mean(surpluss)) %>% 
+  mutate(tm_prev = lag(tm, n = 1), 
+         rr_prev = lag(rr, n = 1), 
+         surpluss_prev = lag(surpluss, n = 1))
+
+#Now we want to make a dataset that contains the population estimates
+
+df_pop$Year <- as.factor(df_pop$Year)
+
+#remove data we do not need
+df_pop2 <- df_pop %>% 
+  filter(!(Pop.variable == "forekomst")) %>% 
+  filter(Estimate == "est") %>% 
+  dplyr::select(!c(`...1`, `Estimate`))
+
+#2018 was a year without observations. Here we code for substituting the missing data with the average for all other years. We remove Filetassen because this population was not monitored before 2020. 
+df_pop2 <- df_pop2 %>% 
+  group_by(Locality, Pop.variable) %>%
+  summarise(Year = "2018", 
+            Value = mean(Value)) %>%#fill in missing 2018 data with average population size
+  bind_rows(df_pop2) %>%
+  arrange(Year, Pop.variable) %>% #Needs to filter away value for Filletassen because there observation were not started yet in 2018
+  filter(!(Year == "2018" & Locality == "Filletassen"))
+
+#rename some variables to streamline with the weather data set. We also calculate the population change from year to year. 
+df_pop2 <- df_pop2 %>% 
+  rename(pop_variable = Pop.variable) %>% 
+  setNames(tolower(names(.))) %>% 
+  group_by(locality, pop_variable) %>% 
+  mutate(pop_change = value - lag(value, n=1))
+
+df_pop2$year <- as.factor(df_pop2$year)
+df_agg_clim$year <- as.factor(df_agg_clim$year)
+
+#Join the population data to the dataset
+df_pop_clim <- df_pop2 %>% 
+  left_join(df_agg_clim, by = c("year"))
+
+
+```
+
+## Visualization population size vs climate
+
+```{r}
+#| label: Visualize population size vs climate
+#| warning: false 
+
+df_pop_clim %>% 
+ggplot(aes(x = surpluss_prev, y = value))+
+  geom_point(aes(colour = factor(pop_variable)))+
+  facet_wrap(~locality, scales = "free")
+
+```
